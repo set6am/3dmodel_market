@@ -25,6 +25,5 @@ urlpatterns = [
     path('', views.ProductListCreateView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('products/', include('products.urls')),
-    
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]
