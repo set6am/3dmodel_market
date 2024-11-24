@@ -2,11 +2,12 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from rest_framework.authentication import get_user_model
 
 
 class Category(models.Model):
     """
-    Категории 3д моделей.
+    Categories of 3d models.
     """
     name = models.CharField(max_length=20, 
                             unique=True)
@@ -22,11 +23,12 @@ class Category(models.Model):
 
 class Product(models.Model):
     """
-    Карточка 3д модели.
+    Card of 3d model.
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    owner = models.ForeignKey(User, 
-                              on_delete=models.CASCADE)
+    owner = models.ForeignKey(get_user_model(), 
+                              on_delete=models.CASCADE,
+                              blank=True)
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     images = models.ImageField(upload_to='products/%Y/%m/%d',
